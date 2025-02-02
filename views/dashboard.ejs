@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Benvenuto <%= user.name %></h1>
+    <p>Email: <%= user.email %></p>
+    <p>Abbonamento: <%= user.membershipType %></p>
+    
+    <% if (user.membershipType === 'premium') { %>
+        <div>
+            <h2>Prenotazioni</h2>
+            <a href="/bookings">Gestisci prenotazioni</a>
+        </div>
+    <% } %>
+    
+    <a href="/auth/logout">Logout</a>
+</body>
+</html>

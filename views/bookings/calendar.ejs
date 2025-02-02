@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prenotazioni</title>
+    <style>
+        .slot-container { margin: 20px 0; }
+        .slot { 
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .full { background-color: #ffe6e6; }
+        .available { background-color: #e6ffe6; }
+        .weekend-warning {
+            background-color: #fff3cd;
+            border: 2px solid #ffeeba;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prenota un Allenamento</h1>
+    
+    <% if (error) { %>
+        <p style="color: red;"><%= error %></p>
+    <% } %>
+    
+    <% if (success) { %>
+        <p style="color: green;"><%= success %></p>
+    <% } %>
+
+    <% if (isWeekend) { %>
+        <div class="weekend-warning">
+            <h3>⚠️ Palestra Chiusa ⚠️</h3>
+            <p>La palestra è chiusa il sabato e la domenica</p>
+        </div>
+    <% } %>
+
+    <form action="/bookings" method="GET">
+        <input type="date" name="date" 
+               min="<%= new Date().toISOString().split('T')[0] %>" 
+               value="<%= selectedDate || '' %>"
+               required
+               id="bookingDate">
+        <button type="submit">Verifica Disponibilità</button>
+    </form>
+
+    <% if (selectedDate && !isWeekend) { %>
+        <h2>Disponibilità per il <%= selectedDate %></h2>
+        
+        <% if (allFull) { %>
+            <p style="color: red;">Tutti gli slot per questa data sono esauriti!</p>
+        <% } else if (userBooking) { %>
+            <p style="color: green;">Hai già prenotato: <%= userBooking.slot %></p>
+        <% } else { %>
+            <div class="slot-container">
+                <% slots.forEach(slot => { %>
+                    <div class="slot <%= slot.isFull ? 'full' : 'available' %>">
+                        <h3><%= slot.name %></h3>
+                        <p>Posti disponibili: <%= slot.available %></p>
+                        
+                        <% if (!slot.isFull) { %>
+                            <form action="/bookings/prenota" method="POST">
+                                <input type="hidden" name="date" value="<%= selectedDate %>">
+                                <input type="hidden" name="slot" value="<%= slot.name %>">
+                                <button type="submit">Prenota</button>
+                            </form>
+                        <% } else { %>
+                            <p style="color: red;">Esaurito</p>
+                        <% } %>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+    <% } %>
+
+    <a href="/dashboard">← Torna alla Dashboard</a>
+
+    <script>
+        // Imposta la data minima a domani
+        document.getElementById('bookingDate').min = 
+            new Date(new Date().getTime() + 86400000).toISOString().split('T')[0];
+    </script>
+</body>
+</html>
