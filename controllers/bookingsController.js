@@ -44,7 +44,6 @@ const getBookings = async (req, res) => {
             });
             allFull = slotsData.every(slot => slot.isFull);
           }
-          console.log(`Data selezionata: ${dt.toISODate()}, È festiva? ${isHolidayFlag}`);
         }
       }
   
