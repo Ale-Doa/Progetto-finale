@@ -4,11 +4,11 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <h1>Benvenuto <%= user.name %></h1>
+    <h1>Ciao <%= user.name %></h1>
     <p>Email: <%= user.email %></p>
     <p>Abbonamento: <%= user.membershipType %></p>
     
-    <% if (user.membershipType === 'premium') { %>
+    <% if (isPremium(user.membershipType)) { %>
         <div>
             <h2>Prenotazioni</h2>
             <a href="/bookings">Gestisci prenotazioni</a>

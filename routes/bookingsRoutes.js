@@ -2,13 +2,20 @@ const express = require('express');
 const router = express.Router();
 const Booking = require('../models/Bookings');
 const { DateTime } = require('luxon');
+const { isPremium } = require('../utils');
 
-const isPremium = (req, res, next) => {
-  if(req.session.user?.membershipType === 'premium') return next();
-  res.redirect('/dashboard?error=Solo utenti premium possono prenotare');
+// Middleware per verificare se l'utente è premium
+const requirePremiumMembership = (req, res, next) => {
+  if (!req.session.user) {
+    return res.redirect('/auth/login?error=Devi accedere per visualizzare questa pagina');
+  }
+  if (!isPremium(req.session.user.membershipType)) {
+    return res.redirect('/dashboard?error=Solo utenti premium possono accedere a questa funzionalità');
+  }
+  next();
 };
 
-router.get('/', isPremium, async (req, res) => {
+router.get('/', requirePremiumMembership, async (req, res) => {
   try {
     const dateParam = req.query.date;
     let selectedDate = '';
@@ -89,7 +96,7 @@ router.get('/', isPremium, async (req, res) => {
   }
 });
 
-router.post('/prenota', isPremium, async (req, res) => {
+router.post('/prenota', requirePremiumMembership, async (req, res) => {
   try {
     const { date, slot } = req.body;
     

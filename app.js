@@ -5,6 +5,7 @@ const MongoStore = require('connect-mongo');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const bookingsRoutes = require('./routes/bookingsRoutes');
+const { isPremium } = require('./utils');
 
 const app = express();
 
@@ -32,7 +33,10 @@ app.use('/bookings', bookingsRoutes);
 app.get('/', (req, res) => res.redirect('/auth/login'));
 app.get('/dashboard', (req, res) => {
     if (!req.session.user) return res.redirect('/auth/login');
-    res.render('dashboard', { user: req.session.user });
+    res.render('dashboard', {
+        user: req.session.user,
+        isPremium: isPremium // Passiamo la funzione helper alla view
+    });
 });
 
 const PORT = process.env.PORT || 3000;
