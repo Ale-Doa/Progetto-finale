@@ -7,14 +7,23 @@
     <h1>Ciao <%= user.name %></h1>
     <p>Email: <%= user.email %></p>
     <p>Abbonamento: <%= user.membershipType %></p>
-    
+
     <% if (isPremium(user.membershipType)) { %>
         <div>
             <h2>Prenotazioni</h2>
             <a href="/bookings">Gestisci prenotazioni</a>
         </div>
+        <div>
+            <h3>Dettagli Abbonamento</h3>
+            <p>
+                La tua sottoscrizione scadrà il:
+                <strong><%= subscriptionEndDate || 'Data non disponibile' %></strong>
+            </p>
+        </div>
+    <% } else { %>
+        <p>Hai un abbonamento basic. Passa ad un abbonamento premium per sbloccare più funzionalità!</p>
     <% } %>
-    
+
     <a href="/auth/logout">Logout</a>
 </body>
 </html>

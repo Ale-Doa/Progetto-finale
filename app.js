@@ -6,6 +6,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const bookingsRoutes = require('./routes/bookingsRoutes');
 const { isPremium } = require('./utils');
+const { getDashboard } = require('./controllers/dashboardController');
 
 const app = express();
 
@@ -31,7 +32,7 @@ app.use('/auth', authRoutes);
 app.use('/bookings', bookingsRoutes);
 
 app.get('/', (req, res) => res.redirect('/auth/login'));
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', getDashboard, (req, res) => {
     if (!req.session.user) return res.redirect('/auth/login');
     res.render('dashboard', {
         user: req.session.user,
