@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Admin</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard Admin</h1>
+
+    <% if (success) { %>
+        <p class="success"><%= success %></p>
+    <% } %>
+
+    <% if (error) { %>
+        <p class="error"><%= error %></p>
+    <% } %>
+
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Tipo di Abbonamento</th>
+            <th>Data di Scadenza</th>
+            <th>Azioni</th>
+        </tr>
+        <% users.forEach(user => { %>
+            <tr>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.membershipType %></td>
+                <td><%= user.subscriptionEndDate || 'N/A' %></td>
+                <td>
+                    <form action="/admin/update-membership" method="POST">
+                        <input type="hidden" name="userId" value="<%= user._id %>">
+                        <select name="membershipType" required>
+                            <option value="basic" <%= user.membershipType === 'basic' ? 'selected' : '' %>>Basic</option>
+                            <option value="premium1" <%= user.membershipType === 'premium1' ? 'selected' : '' %>>Premium 1 mese</option>
+                            <option value="premium3" <%= user.membershipType === 'premium3' ? 'selected' : '' %>>Premium 3 mesi</option>
+                            <option value="premium6" <%= user.membershipType === 'premium6' ? 'selected' : '' %>>Premium 6 mesi</option>
+                            <option value="premium12" <%= user.membershipType === 'premium12' ? 'selected' : '' %>>Premium 12 mesi</option>
+                            <option value="admin" <%= user.membershipType === 'admin' ? 'selected' : '' %>>Admin</option>
+                        </select>
+                        <button type="submit">Aggiorna</button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+
+    <a href="/auth/logout">Logout</a>
+</body>
+</html>

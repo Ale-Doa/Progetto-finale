@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   registrationDate: { type: Date, default: Date.now },
-  membershipType: { type: String, enum: ['basic', 'premium1', 'premium3', 'premium6', 'premium12'], default: 'basic' }
+  membershipType: { type: String, enum: ['basic', 'premium1', 'premium3', 'premium6', 'premium12', 'admin'], default: 'basic' }
 });
 
 // Middleware pre-save per hash della password
