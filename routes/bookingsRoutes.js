@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getBookings, createBooking } = require('../controllers/bookingsController');
+const { getBookings, createBooking, cancelBooking } = require('../controllers/bookingsController');
 const { isPremium } = require('../utils');
 
 const requirePremiumMembership = (req, res, next) => {
@@ -15,5 +15,6 @@ const requirePremiumMembership = (req, res, next) => {
 
 router.get('/', requirePremiumMembership, getBookings);
 router.post('/prenota', requirePremiumMembership, createBooking);
+router.post('/', requirePremiumMembership, cancelBooking);
 
 module.exports = router;

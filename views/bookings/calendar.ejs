@@ -85,6 +85,25 @@
         <% } %>
     <% } %>
 
+    <!-- Sezione per le prenotazioni dell'utente -->
+    <h2>Le mie prenotazioni</h2>
+    <% if (userBookings.length > 0) { %>
+        <div class="my-bookings">
+            <% userBookings.forEach(booking => { %>
+                <div class="my-booking">
+                    <p>Data: <%= DateTime.fromJSDate(booking.bookingDate).toFormat('dd/MM/yyyy') %></p>
+                    <p>Slot: <%= booking.slot %></p>
+                    <form action="/bookings" method="POST" onsubmit="return confirm('Sei sicuro di voler cancellare questa prenotazione?')">
+                        <input type="hidden" name="id" value="<%= booking._id %>">
+                        <button type="submit" class="cancel-button">Cancella</button>
+                    </form>
+                </div>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <p>Non hai alcuna prenotazione attiva.</p>
+    <% } %>
+
     <a href="/dashboard">← Torna alla Dashboard</a>
 
     <script>
