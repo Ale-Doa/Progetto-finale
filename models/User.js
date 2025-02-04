@@ -27,24 +27,28 @@ userSchema.pre('save', async function (next) {
   }
 });
 
-// Middleware post-save per cancellare le prenotazioni se l'abbonamento diventa "basic"
+// Middleware post-save per gestire il cambio di membership
 userSchema.post('save', async function (doc, next) {
   try {
-    // Verifica se this.$original è definito (solo per aggiornamenti)
+    // Verifica se il tipo di abbonamento è stato modificato
     if (this.$original && this.$original.membershipType !== doc.membershipType) {
-      const previousMembershipType = this.$original.membershipType; // Vecchio tipo di abbonamento
-      const currentMembershipType = doc.membershipType; // Nuovo tipo di abbonamento
+      const previousMembershipType = this.$original.membershipType;
+      const currentMembershipType = doc.membershipType;
+
+      console.log(`Cambio di membership: ${previousMembershipType} -> ${currentMembershipType}`);
 
       // Se l'abbonamento passa da premium a basic, cancella le prenotazioni
       if (
         ['premium1', 'premium3', 'premium6', 'premium12'].includes(previousMembershipType) &&
         currentMembershipType === 'basic'
       ) {
+        console.log('Cancellazione delle prenotazioni...');
         await Booking.deleteMany({ user: doc._id });
       }
     }
     next();
   } catch (error) {
+    console.error('Errore durante il cambio di membership:', error);
     next(error);
   }
 });

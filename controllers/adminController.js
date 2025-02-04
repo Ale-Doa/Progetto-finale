@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Booking = require('../models/Bookings');
 const { DateTime } = require('luxon');
 
 const getAdminDashboard = async (req, res) => {
@@ -39,29 +40,46 @@ const getAdminDashboard = async (req, res) => {
 
 const updateMembership = async (req, res) => {
     try {
-        const { userId, membershipType } = req.body;
-
-        // Verifica che il tipo di abbonamento sia valido
-        if (!['basic', 'premium1', 'premium3', 'premium6', 'premium12', 'admin'].includes(membershipType)) {
-            return res.redirect('/admin/dashboard?error=Tipo di abbonamento non valido');
-        }
-
-        // Trova l'utente e aggiorna il tipo di abbonamento
-        const updatedUser = await User.findByIdAndUpdate(
-            userId,
-            { membershipType },
-            { new: true, runValidators: true }
-        );
-
-        if (!updatedUser) {
-            return res.redirect('/admin/dashboard?error=Utente non trovato');
-        }
-
-        res.redirect('/admin/dashboard?success=Abbonamento aggiornato con successo');
+      const { userId, membershipType } = req.body;
+  
+      // Verifica che il tipo di abbonamento sia valido
+      if (!['basic', 'premium1', 'premium3', 'premium6', 'premium12', 'admin'].includes(membershipType)) {
+        return res.redirect('/admin/dashboard?error=Tipo di abbonamento non valido');
+      }
+  
+      // Trova l'utente corrente
+      const user = await User.findById(userId).lean();
+  
+      if (!user) {
+        return res.redirect('/admin/dashboard?error=Utente non trovato');
+      }
+  
+      // Se il tipo di abbonamento passa da premium a basic, cancella le prenotazioni
+      if (
+        ['premium1', 'premium3', 'premium6', 'premium12'].includes(user.membershipType) &&
+        membershipType === 'basic'
+      ) {
+        console.log(`Cancellazione delle prenotazioni per l'utente ${userId}`);
+        await Booking.deleteMany({ user: userId });
+      }
+  
+      // Aggiorna il tipo di abbonamento dell'utente
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { membershipType },
+        { new: true, runValidators: true }
+      );
+  
+      if (!updatedUser) {
+        return res.redirect('/admin/dashboard?error=Impossibile aggiornare l\'abbonamento');
+      }
+  
+      console.log(`Aggiornamento membership per utente ${userId}: ${membershipType}`);
+      res.redirect('/admin/dashboard?success=Abbonamento aggiornato con successo');
     } catch (error) {
-        console.error('Errore durante l\'aggiornamento del tipo di abbonamento:', error);
-        res.redirect('/admin/dashboard?error=Errore durante l\'aggiornamento del tipo di abbonamento');
+      console.error('Errore durante l\'aggiornamento del tipo di abbonamento:', error);
+      res.redirect('/admin/dashboard?error=Errore durante l\'aggiornamento del tipo di abbonamento');
     }
-};
+  };
 
 module.exports = { getAdminDashboard, updateMembership };
