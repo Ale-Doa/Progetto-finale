@@ -40,7 +40,7 @@ const loginUser = async (req, res) => {
 
 const logoutUser = (req, res) => {
     req.session.destroy();
-    res.redirect('/auth/login');
+    res.redirect('/');
 };
 
 module.exports = { registerUser, loginUser, logoutUser };

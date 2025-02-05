@@ -10,15 +10,16 @@
 
     <% if (isPremium(user.membershipType)) { %>
         <div>
-            <h2>Prenotazioni</h2>
-            <a href="/bookings">Gestisci prenotazioni</a>
-        </div>
-        <div>
             <h3>Dettagli Abbonamento</h3>
             <p>
                 La tua sottoscrizione scadrà il:
                 <strong><%= subscriptionEndDate || 'Data non disponibile' %></strong>
             </p>
+        </div>
+        
+        <div>
+            <h2>Prenotazioni</h2>
+            <a href="/bookings">Gestisci prenotazioni</a>
         </div>
     <% } else { %>
         <p>Hai un abbonamento basic. Passa ad un abbonamento premium per sbloccare più funzionalità!</p>
