@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - Palestra Fitness</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Palestra Fitness</h1>
+        <p>Benvenuto nel tuo centro fitness online!</p>
+    </header>
+    <div class="content">
+        <p>Qui puoi gestire le tue prenotazioni e scoprire i nostri servizi premium.</p>
+        <% if (!user) { %>
+            <a href="/auth/login" class="btn">Accedi</a>
+            <a href="/auth/register" class="btn">Registrati</a>
+        <% } else { %>
+            <p>Ciao, <%= user.name %>! Sei già loggato.</p>
+            <a href="/dashboard" class="btn">Vai alla Dashboard</a>
+            <a href="/auth/logout" class="btn">Logout</a>
+        <% } %>
+    </div>
+</body>
+</html>

@@ -35,6 +35,11 @@ app.use('/auth', authRoutes);
 app.use('/bookings', bookingsRoutes);
 app.use('/admin', adminRoutes);
 
+// Root route (Home Page)
+app.get('/', (req, res) => {
+  res.render('home', { user: req.session.user || null}); // Passa l'utente loggato alla view
+});
+
 app.get('/', (req, res) => res.redirect('/auth/login'));
 // Route per la dashboard
 app.get('/dashboard', async (req, res) => {
