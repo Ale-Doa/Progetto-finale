@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/CSS/home-page.css" />
   </head>
   <body>
-    <div class="home">
+    <div class="container">
       <header>
         <h1>Palestra</h1>
       </header>
@@ -24,8 +24,12 @@
 
       <div class="button">
         <% if (!user) { %>
-        <a href="/auth/login">Accedi</a>
-        <a href="/auth/register">Registrati</a>
+        <div class="login-btn">
+          <a href="/auth/login">Accedi</a>
+        </div>
+        <div class="register-btn">
+          <a href="/auth/register">Registrati</a>
+        </div>
         <% } else { %>
         <p>Ciao, <%= user.name %>! Sei già loggato.</p>
         <a href="/dashboard">Vai alla Dashboard</a>
