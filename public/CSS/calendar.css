@@ -17,8 +17,8 @@ body {
 
 h1 {
     font-family: "Staatliches", serif;
-    font-size: 5rem;
-    margin: 50px 0 50px 0;
+    font-size: 3rem;
+    margin-top: 50px;
 }
 
 h2 {
@@ -26,9 +26,14 @@ h2 {
     font-size: 2rem;
 }
 
-p {
+p, h3 {
     font-family: "Liter", serif;
     font-size: 1.3rem;
+}
+
+a {
+    color: limegreen;
+    margin-bottom: 10px;
 }
 
 .container {
@@ -83,65 +88,54 @@ p {
     }
 }
 
-.info {
+.verify-btn {
+    background-color: rgb(36, 36, 36);
+    border: 1px solid limegreen;
+    color: white;
     padding: 5px;
-    border: 1px solid transparent;
-    margin-bottom: 20px;
-    width: 80%;
-    text-align: left;
+    border-radius: 7px;
+    margin-left: 15px;
 }
 
-.info:hover {
+.slot-container {
+    overflow: auto;
+    max-height: 120px;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     border: 1px solid black;
-    box-shadow: 5px 5px 5px black;
-    transition: 0.2s;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px black;
+}
+
+.slot-p {
+    font-size: 1rem;
+}
+
+.my-bookings {
+    overflow: auto;
+    display: grid;
+    max-height: 160px;
+    width: 80%;
+    grid-template-columns: 1fr 1fr;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px black;
 }
 
 .button {
-    width: 390px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 50px 0 100px 0;
-}
-
-a {
-    font-family: "Liter", serif;
-    font-size: 1.2rem;
-    color: white;
-    text-decoration: none;
-    height: 50px;
-    width: 180px;
-}
-
-.login-btn, .register-btn {
-    height: 50px;
-    width: 180px;
-    padding: 6px;
     background-color: rgb(36, 36, 36);
-    border-radius: 10px;
-    border: 2px solid lime;
-    box-shadow: 0 0 10px white;
-    position: relative;
-    z-index: 0;
+    border: 1px solid limegreen;
+    border-radius: 3px;
+    color: white;
     cursor: pointer;
+    appearance: none;
+    margin-bottom: 10px;
+    padding: 2px;
 }
 
-.login-btn:hover, .register-btn:hover {
-    box-shadow: 0 0 20px white;
-    transition: 0.2s;
+.booking-p {
+    font-size: 1rem;
+    margin-bottom: 3px;
 }
-
-/* .login-btn::after, .register-btn::after {
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -1;
-    padding: 3px;
-    border-radius: 5px;
-    background-image: conic-gradient(#ff4545, #00ff99, #006aff, #ff0095, #ff4545);
-} */
