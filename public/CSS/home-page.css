@@ -38,7 +38,7 @@ p {
     flex-direction: column;
     text-align: center;
     border-radius: 30px;
-    height: 70vh;
+    height: max(70vh, 640px);
     width: min(500px, 90%);
     position: relative;
     color: white;
@@ -63,7 +63,6 @@ p {
     z-index: -10;
     padding: 5px;
     border-radius: 30px;
-    /* background-image: conic-gradient(from var(--angle), white, lime, white, lime, white); */
     background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
     animation: 3s spin linear infinite;
 }
@@ -84,7 +83,7 @@ p {
 }
 
 .info {
-    padding: 5px;
+    padding: 10px;
     border: 1px solid transparent;
     margin-bottom: 20px;
     width: 80%;
@@ -93,12 +92,13 @@ p {
 
 .info:hover {
     border: 1px solid black;
-    box-shadow: 5px 5px 5px black;
+    box-shadow: inset 0 0 5px black;
+    border-radius: 10px;
     transition: 0.2s;
 }
 
 .button {
-    width: 390px;
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -106,15 +106,13 @@ p {
 }
 
 a {
-    font-family: "Liter", serif;
+    font-family: "Staatliches", serif;
     font-size: 1.2rem;
     color: white;
     text-decoration: none;
-    height: 50px;
-    width: 180px;
 }
 
-.login-btn, .register-btn {
+.btn {
     height: 50px;
     width: 180px;
     padding: 6px;
@@ -122,26 +120,13 @@ a {
     border-radius: 10px;
     border: 2px solid lime;
     box-shadow: 0 0 10px white;
-    position: relative;
-    z-index: 0;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.login-btn:hover, .register-btn:hover {
+.btn:hover {
     box-shadow: 0 0 20px white;
     transition: 0.2s;
 }
-
-/* .login-btn::after, .register-btn::after {
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -1;
-    padding: 3px;
-    border-radius: 5px;
-    background-image: conic-gradient(#ff4545, #00ff99, #006aff, #ff0095, #ff4545);
-} */

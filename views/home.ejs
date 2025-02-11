@@ -24,16 +24,15 @@
 
       <div class="button">
         <% if (!user) { %>
-        <div class="login-btn">
+        <div class="btn">
           <a href="/auth/login">Accedi</a>
         </div>
-        <div class="register-btn">
+        <div class="btn">
           <a href="/auth/register">Registrati</a>
         </div>
         <% } else { %>
-        <p>Ciao, <%= user.name %>! Sei già loggato.</p>
-        <a href="/dashboard">Vai alla Dashboard</a>
-        <a href="/auth/logout">Logout</a>
+        <a class="btn" href="/dashboard">Vai alla Dashboard</a>
+        <a class="btn" href="/auth/logout">Logout</a>
         <% } %>
       </div>
     </div>

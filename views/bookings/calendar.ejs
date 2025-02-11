@@ -52,7 +52,7 @@
 
           <% if (!slot.isFull) { %>
           <form action="/bookings/prenota" method="POST">
-            <input type="hidden" name="date" value="<%= selectedDate %>" />
+            <input class="selected-date" type="hidden" name="date" value="<%= selectedDate %>"/>
             <input type="hidden" name="slot" value="<%= slot.name %>" />
             <button class="button" type="submit">Prenota</button>
           </form>

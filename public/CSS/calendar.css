@@ -43,7 +43,7 @@ a {
     flex-direction: column;
     text-align: center;
     border-radius: 30px;
-    height: 70vh;
+    height: max(70vh, 640px);
     width: min(500px, 90%);
     position: relative;
     color: white;
@@ -68,7 +68,6 @@ a {
     z-index: -10;
     padding: 5px;
     border-radius: 30px;
-    /* background-image: conic-gradient(from var(--angle), white, lime, white, lime, white); */
     background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
     animation: 3s spin linear infinite;
 }
@@ -138,4 +137,14 @@ a {
 .booking-p {
     font-size: 1rem;
     margin-bottom: 3px;
+}
+
+@media (max-width: 450px) {
+    h2 {
+        font-size: 1.7rem;
+    }
+
+    .slot-container {
+        grid-template-columns: 1fr 1fr;
+    }
 }

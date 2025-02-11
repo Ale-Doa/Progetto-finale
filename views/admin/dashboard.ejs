@@ -27,10 +27,10 @@
             </tr>
             <% users.forEach(user => { %>
                 <tr>
-                    <td><%= user.name %></td>
-                    <td><%= user.email %></td>
-                    <td><%= user.membershipType %></td>
-                    <td><%= user.subscriptionEndDate || 'N/A' %></td>
+                    <td data-cell="Nome: "><%= user.name %></td>
+                    <td data-cell="Email: "><%= user.email %></td>
+                    <td data-cell="Abbonamento: "><%= user.membershipType %></td>
+                    <td data-cell="Scadenza: "><%= user.subscriptionEndDate || 'N/A' %></td>
                     <td>
                         <form action="/admin/update-membership" method="POST">
                             <input type="hidden" name="userId" value="<%= user._id %>">
