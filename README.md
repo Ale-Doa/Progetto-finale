@@ -135,6 +135,7 @@ Se un utente premium passa a basic, tutte le sue prenotazioni vengono cancellate
 
 **Per gli amministratori**
 1. Accedi con un account che ha il ruolo admin.
+    - L'unico modo per dare a un account i permessi da amministratore è farlo direttamente dal database
 2. Vai alla dashboard admin (/admin/dashboard) per visualizzare l'elenco degli utenti.
 3. Usa il menu a tendina per cambiare il tipo di abbonamento di un utente.
     - Se un utente premium passa a basic, le sue prenotazioni verranno cancellate automaticamente.
@@ -144,5 +145,3 @@ Se un utente premium passa a basic, tutte le sue prenotazioni vengono cancellate
 ## Licenza
 
 Questo progetto è rilasciato sotto licenza MIT . Sono consentite copia, modifica e distribuzione del codice, purché venga mantenuto il riferimento alla licenza originale.
-
---- 
