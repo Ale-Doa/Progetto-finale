@@ -67,6 +67,13 @@ Progetto Node-Gym/
 
 ## Installazione
 
+### Prerequisiti
+- Node.js (versione 14 o superiore)
+- MongoDB (versione 4 o superiore)
+- npm (incluso con Node.js)
+
+### Passi per l'installazione
+
 1. **Clona il Repository**
    Clona il repository del progetto sul tuo computer:
    ```
